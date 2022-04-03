@@ -13,6 +13,7 @@ public extension Networking {
         case notHttpResponse
         case decodingError(_ type: any Decodable.Type)
         case encodingError(_ type: any Encodable.Type)
+        case errorSettingParams(params: [String:String], url: String)
         case unexpectedStatusCode(code: Int)
         case unknown
     }
@@ -29,6 +30,8 @@ extension Networking.NetworkError: LocalizedError {
             return "Error while trying to decode \(type.self)"
         case let .encodingError(type):
             return "Error while trying to encode \(type.self)"
+        case .errorSettingParams(let params, let url):
+            return "Error while setting params \(params.description) on url \(url)"
         case let .unexpectedStatusCode(code):
             return "Unexpected status code \(code)"
         case .unknown:

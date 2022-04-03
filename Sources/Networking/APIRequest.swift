@@ -15,19 +15,24 @@ public struct APIRequest<URLBase> where URLBase: BaseURL {
      Initializes a new APIRequest
      
      - Parameter url: The url that conforms to `BaseURL` protocol.
-     - Parameter params: The query params which will be added after the `url` param.
+     - Parameter queryItems: The query items which will be added after the `url` param.
+     - Parameter params: The params which will replace placeholders in url (e.g. {id}...).
      - Parameter method: The HTTP method.
      */
     public init(
         _ url: URLBase,
-        params: [String: Any] = [:],
+        queryItems: [String: String] = [:],
+        params: [String: String] = [:],
         method: Networking.HttpMethod
     ) throws {
-        guard var urlComponents = URLComponents(string: url.fullURL) else {
-            throw Networking.NetworkError.invalidURL(url: url.fullURL)
+        var requestURL = url.fullURL
+        
+        Networking.parseParams(&requestURL, params: params)
+        
+        guard var urlComponents = URLComponents(string: requestURL) else {
+            throw Networking.NetworkError.invalidURL(url: requestURL)
         }
-
-        urlComponents.queryItems = Networking.toQueryItems(params)
+        urlComponents.queryItems = Networking.toQueryItems(queryItems)
 
         guard let urlRequest = urlComponents.url else {
             throw Networking.NetworkError.invalidURL(url: urlComponents.url?.description ?? url.fullURL)

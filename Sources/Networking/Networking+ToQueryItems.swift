@@ -20,4 +20,10 @@ extension Networking {
 
         return filtered.isEmpty ? nil : filtered
     }
+    
+    static func parseParams(_ url: inout String, params: [String: String]) {
+        params.forEach {
+            url = url.replacingOccurrences(of: "{\($0.key)}", with: $0.value)
+        }
+    }
 }
