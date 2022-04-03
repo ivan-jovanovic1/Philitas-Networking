@@ -29,6 +29,8 @@ public struct APIRequest<URLBase> where URLBase: BaseURL {
         
         Networking.parseParams(&requestURL, params: params)
         
+        requestURL = requestURL.urlEncoded
+        
         guard var urlComponents = URLComponents(string: requestURL) else {
             throw Networking.NetworkError.invalidURL(url: requestURL)
         }
