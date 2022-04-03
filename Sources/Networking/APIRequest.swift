@@ -18,7 +18,7 @@ public struct APIRequest<URLBase> where URLBase: BaseURL {
      - Parameter params: The query params which will be added after the `url` param.
      - Parameter method: The HTTP method.
      */
-    init(
+    public init(
         _ url: URLBase,
         params: [String: Any] = [:],
         method: Networking.HttpMethod
