@@ -6,3 +6,5 @@
 //
 
 public enum Networking {}
+
+@_exported import Foundation
