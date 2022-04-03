@@ -1,6 +1,8 @@
-public struct Networking {
-    public private(set) var text = "Hello, World!"
+//
+//  Networking.swift
+//
+//
+//  Created by Ivan Jovanović on 03/04/2022.
+//
 
-    public init() {
-    }
-}
+public enum Networking {}
