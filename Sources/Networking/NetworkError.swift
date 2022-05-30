@@ -7,19 +7,18 @@
 
 import Foundation
 
-public extension Networking {
-    enum NetworkError: Error {
-        case invalidURL(url: String)
-        case notHttpResponse
-        case decodingError(_ type: any Decodable.Type)
-        case encodingError(_ type: any Encodable.Type)
-        case errorSettingParams(params: [String:String], url: String)
-        case unexpectedStatusCode(code: Int)
-        case unknown
-    }
+public enum NetworkError: Error {
+    case invalidURL(url: String)
+    case notHttpResponse
+    case decodingError(_ type: any Decodable.Type)
+    case encodingError(_ type: any Encodable.Type)
+    case errorSettingParams(params: [String:String], url: String)
+    case unexpectedStatusCode(code: Int)
+    case notSupported(reason: String)
+    case unknown
 }
 
-extension Networking.NetworkError: LocalizedError {
+extension NetworkError: LocalizedError {
     public var errorDescription: String? {
         switch self {
         case let .invalidURL(url):
@@ -34,6 +33,8 @@ extension Networking.NetworkError: LocalizedError {
             return "Error while setting params \(params.description) on url \(url)"
         case let .unexpectedStatusCode(code):
             return "Unexpected status code \(code)"
+        case let .notSupported(reason):
+            return "Not support. \(reason)"
         case .unknown:
             return "Unknown networking error"
         }

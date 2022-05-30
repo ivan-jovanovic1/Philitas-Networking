@@ -7,11 +7,10 @@
 
 import Foundation
 
-public extension URLRequest {
-    /**
-     Returns a cURL command representation of this URL request.
-     */
-    var cURL: String {
+extension URLRequest {
+
+    /// Returns the cURL command representation of the URL request.
+    public var cURL: String {
         // Logging URL requests in whole may expose sensitive data,
         // or open up possibility for getting access to your user data,
         // so make sure to disable this feature for production builds!
@@ -34,7 +33,11 @@ public extension URLRequest {
                 }
             }
 
-            if let httpBody = httpBody, !httpBody.isEmpty, let string = String(data: httpBody, encoding: .utf8), !string.isEmpty {
+            if let httpBody = httpBody,
+                let string = String(data: httpBody, encoding: .utf8),
+                !httpBody.isEmpty,
+                !string.isEmpty
+            {
                 body += "-d '\(string)'"
             }
 
@@ -43,11 +46,11 @@ public extension URLRequest {
             }
 
             return """
-            \(base)
-            \(method)
-            \(headers)\(body)
-            \(reqURL)
-            """
+                \(base)
+                \(method)
+                \(headers)\(body)
+                \(reqURL)
+                """
         #endif
     }
 }

@@ -7,7 +7,7 @@
 
 import Foundation
 
-extension Networking {
+enum Query {
     static func toQueryItems(_ params: [String: Any]) -> [URLQueryItem]? {
         let filtered = params.compactMap { param -> URLQueryItem? in
             guard case Optional<Any>.some = param.value else {
@@ -21,9 +21,9 @@ extension Networking {
         return filtered.isEmpty ? nil : filtered
     }
     
-    static func parseParams(_ url: inout String, params: [String: String]) {
-        params.forEach {
-            url = url.replacingOccurrences(of: "{\($0.key)}", with: $0.value)
+    static func parseParams(_ url: String, params: [String: String]) -> String {
+        params.reduce(into: url) {
+            $0 = $0.replacingOccurrences(of: "{\($1.key)}", with: $1.value)
         }
     }
 }

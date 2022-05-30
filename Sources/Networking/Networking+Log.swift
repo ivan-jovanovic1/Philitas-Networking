@@ -14,7 +14,7 @@ extension Networking {
 		Networking.logger.debug(
 			"""
 
-			💬📡 REQUEST:
+			💬📡🚀 REQUEST:
 			\(request.cURL)
 			######################################################################
 			"""
@@ -25,9 +25,9 @@ extension Networking {
 		Networking.logger.debug(
 			"""
 
-			💬📡 RESPONSE:
+			💬📡🔙 RESPONSE:
 			\(response.description)
-			💬📡 RESPONSE BODY:
+			💬📡🔙 RESPONSE BODY:
 			\(String(data: data, encoding: .utf8) ?? "")
 			######################################################################
 			"""

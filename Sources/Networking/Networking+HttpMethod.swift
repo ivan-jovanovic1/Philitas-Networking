@@ -7,15 +7,13 @@
 
 import Foundation
 
-public extension Networking {
-    enum HttpMethod: String {
-        case get
-        case post
-        case put
-        case delete
+public enum HttpMethod: String {
+    case get
+    case post
+    case put
+    case delete
 
-        var name: String {
-            rawValue.uppercased()
-        }
+    var name: String {
+        rawValue.uppercased()
     }
 }
