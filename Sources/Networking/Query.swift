@@ -21,6 +21,10 @@ enum Query {
         return filtered.isEmpty ? nil : filtered
     }
     
+    /// Converts placeholders into values from the params.
+    /// E.g. from 'www.example.com/words/byId/{id}' to 'www.example.com/words/byId/5'
+    ///
+    /// Returns: A URL string with actual parameters.
     static func parseParams(_ url: String, params: [String: String]) -> String {
         params.reduce(into: url) {
             $0 = $0.replacingOccurrences(of: "{\($1.key)}", with: $1.value)
