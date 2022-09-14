@@ -89,6 +89,10 @@ extension APIRequest {
 
     return value
   }
+    
+    public func perform<D: Decodable>(_ type: D.Type) async throws -> D {
+        try await perform()
+    }
 }
 
 extension URLSession {
