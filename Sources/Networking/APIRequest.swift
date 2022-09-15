@@ -8,12 +8,7 @@
 import Foundation
 
 /// Represents the HTTP request with standard HTTP methods (GET, POST, PUT and DELETE).
-public struct APIRequest<URLBase>
-where
-  URLBase: BaseURL,
-  URLBase: RawRepresentable,
-  URLBase.RawValue == String
-{
+public struct APIRequest<U> where U: BaseURL {
   private var request: URLRequest
   private let verifyResponse: Bool
 
@@ -25,7 +20,7 @@ where
   ///   - method: The HTTP method.
   ///   - verifyResponse: The value indicating whether the answer should be verified or not.
   public init(
-    _ url: URLBase,
+    _ url: U,
     queryItems: [String: String] = [:],
     params: [String: String] = [:],
     method: HttpMethod,
